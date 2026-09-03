@@ -1,0 +1,182 @@
+﻿<Page x:Class="MertTool.Pages.panelBienvenida"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:usercontrols="clr-namespace:MertTool.UserControls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MertTool.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1280"
+      Title="panelBienvenida">
+
+    <Page.Resources>
+        <FontFamily x:Key="FuenteJohn">pack://application:,,,/res/fonts/#Muro Regulat</FontFamily>
+        <FontFamily x:Key="FuenteJohnInclinada">pack://application:,,,/res/fonts/#Muro Slant</FontFamily>
+
+        <!--ESTILO PARA LOS BOTONES-->
+        <Style x:Key="MinimalButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#6A0DAD"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="0 -1000 0 0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#6A0DAD"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--EFECTO PARA CUANDO EL RATON ESTE ENCIMA-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <!--ANIMACION DEL FONDO-->
+                                            <ColorAnimation 
+                                        Storyboard.TargetName="border" 
+                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                        From="Transparent" To="#6A0DAD" Duration="0:0:0.3" AutoReverse="False"/>
+                                            <!--ANIMACION DEL BORDE
+                            <ColorAnimation 
+                                Storyboard.TargetName="border" 
+                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" 
+                                From="Purple" To="Blue" Duration="0:0:0.3" AutoReverse="False"/>
+                            -->
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+
+                            <!--EFECTO PARA CUANDO EL RATON SE VA-->
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <!--ANIMACION DEL FONDO-->
+                                            <ColorAnimation 
+                                        Storyboard.TargetName="border" 
+                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                        From="#6A0DAD" To="Transparent" Duration="0:0:0.3" AutoReverse="False"/>
+                                            <!--ANIMACION DEL BORDE
+                            <ColorAnimation 
+                                Storyboard.TargetName="border" 
+                                Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" 
+                                From="Blue" To="Purple" Duration="0:0:0.3" AutoReverse="False"/>
+                             -->
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <!--EFECTO PARA CUANDO SE PRESIONE EL BOTON-->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+        <Border Margin="10" Background="Transparent" CornerRadius="15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                
+
+                <!--CONTENIDO PRINCIPAL EN LA FILA 1-->
+                <Grid Grid.Row="1" Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Welcome toaaaaa" Foreground="White" FontSize="100"
+                           FontFamily="{StaticResource FuenteJohnInclinada}"
+                           Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                    <Image Source="/res/media/letters/Project-Lightning-font2.png"
+                       Grid.Row="1" Height="170" RenderOptions.BitmapScalingMode="HighQuality"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Select an app to get started" Foreground="White" FontSize="30"
+                               FontFamily="{StaticResource FuenteJohnInclinada}"
+                               Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top"
+                               Margin="0,0,0,20"/>
+
+                        <!--Botones-->
+                        <Grid Grid.Row="1" Width="600" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Width="150" Height="50"
+                                Content="Quick Guide" Style="{StaticResource MinimalButtonStyle}"
+                                Click="quickGuideButtonClick"/>
+                            <Button Grid.Column="1" Width="150" Height="50"
+                                Content="Changelog" Style="{StaticResource MinimalButtonStyle}"
+                                Click="changeLogButtonClick"/>
+                            <Button Grid.Column="2" Width="150" Height="50"
+                                Content="Legal Notice" Style="{StaticResource MinimalButtonStyle}"
+                                Click="legalButtonClick"/>
+                        </Grid>
+
+                        <!--Sponsors-->
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Sponsors" Foreground="White" FontSize="20"
+                                   FontFamily="{StaticResource FuenteJohnInclinada}"
+                                   Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                            <Image Grid.Row="1" Name="imagenSponsor" Width="350" Height="60"
+                               Margin="0,10,0,0" VerticalAlignment="Top"
+                               RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                                </Image.RenderTransform>
+                            </Image>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+
+</Page>
