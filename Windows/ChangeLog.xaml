@@ -1,0 +1,202 @@
+﻿<Window x:Class="MertTool.Windows.ChangeLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        Width="600" Height="500"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+
+        <!--ESTILO DEL SCROLLVIEW-->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="3"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Track Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineUpCommand" Visibility="Collapsed"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#555" CornerRadius="3"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineDownCommand" Visibility="Collapsed"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--ESTILO PARA EL BOTON DE SALIR-->
+        <Style x:Key="BotonSalir" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#6A0DAD"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#6A0DAD"/>
+            <Setter Property="Cursor" Value="Hand"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                          VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--EFECTO PARA CUANDO EL RATON ESTE ENCIMA-->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <!--ANIMACION DEL FONDO-->
+                                            <ColorAnimation 
+                                            Storyboard.TargetName="border" 
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                            From="Transparent" To="#6A0DAD" Duration="0:0:0.3" AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+
+                            <!--EFECTO PARA CUANDO EL RATON SE VA-->
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <!--ANIMACION DEL FONDO-->
+                                            <ColorAnimation 
+                                            Storyboard.TargetName="border" 
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                            From="#6A0DAD" To="Transparent" Duration="0:0:0.3" AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <!--EFECTO PARA CUANDO SE PRESIONE EL BOTON-->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border CornerRadius="15" Background="#FF2D2D30" Padding="20" BorderBrush="#6A0DAD" BorderThickness="4">
+        <DockPanel LastChildFill="True">
+            <!--BOTÓN DE CIERRE-->
+            <StackPanel DockPanel.Dock="Top">
+                <Button Content="X" Width="30" Height="30" HorizontalAlignment="Right"
+                        Style="{StaticResource BotonSalir}" Click="CerrarClick"/>
+
+                <StackPanel>
+                    <!--GIF DE CABEZERA-->
+                    <Image x:Name="gifImage" Grid.Row="0" Height="100" RenderOptions.BitmapScalingMode="HighQuality" Margin="0,0,0,10"/>
+                    <TextBlock Text="Changelog" Foreground="White" FontSize="28" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                </StackPanel>
+                
+            </StackPanel>
+
+            <!--CONTENIDO CON SCROLL-->
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,10,0,0">
+                <StackPanel>
+
+                    <!--v3.0.1.0-->
+                    <TextBlock Text="v3.0.1.0" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* Feature to automatically replace files to be able to launch the game &#x0a;    without steam.&#x0a;
+* Notifications for successful replacement or errors.&#x0a;
+* Simple and intuitive interface for selecting the game folder.&#x0a;
+* Instructions for running Steam games directly from their executable after &#x0a;   DLL replacement.&#x0a;
+* Support for most Steam game installations (Steam\steamapps &#x0a;    \common).;"/>
+
+                    <!--v3.0.0.0-->
+                    <TextBlock Text="v3.0.0.0" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* New Library Management (SteamTools Integration):&#x0a;
+    * Added a new Library panel to view games added by SteamTools. (Note: &#x0a;        This only shows SteamTools games, not your entire Steam library).&#x0a;
+    * Users can now search for and add games to the library using the &#x0a;        AppID.&#x0a;
+    * Added functionality to remove SteamTools-added games from the &#x0a;        library.&#x0a;
+    * Added an 'Settings' button to the main menu for configuration.&#x0a;
+    * In Settings, users can specify the Steam installation path and install &#x0a;        LightningTools.&#x0a;&#x0a;
+* Discord Shop added as a section in the app: &#x0a;
+    * I've added the Dsicord store to the app with cached images and full &#x0a;        prices.&#x0a;&#x0a;
+* Download &amp; Performance Improvements:&#x0a;
+    * Implemented local image caching for Bypasses, Online Fixes, and the &#x0a;        Library to reduce network load on slow connections. Images are now &#x0a;        loaded from a dedicated local folder.&#x0a;
+    * Improved download branch logic in Game Fixes.&#x0a;&#x0a;
+* UI &amp; Download Experience:&#x0a;
+    * Added a side panel for smoother navigation between main application &#x0a;        sections.&#x0a;
+    * Adaptive layout implemented for better compatibility with small &#x0a;        screens.&#x0a;
+    * Download speed is now displayed during Fixes download.&#x0a;
+    * Total fix size (weight) is now displayed during download.&#x0a;
+    * Download progress bar accuracy has been significantly improved.&#x0a;&#x0a;
+* Stability &amp; Fixes:&#x0a;
+    * Addressed and investigated the recurring 'Task was cancelled' error, &#x0a;       often reported in the Arabian region.&#x0a;
+    * The Auto-Update system has been refined to only display the update &#x0a;        message after the new version has finished downloading.&#x0a;&#x0a;
+* Support:&#x0a;
+    * Added slightly changed the Ko-Fi button and added another one for &#x0a;        Revolut for greater payment compatibility.
+"/>
+
+                    <!--v2.3.0.0-->
+                    <TextBlock Text="v2.3.0.0" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* I’ve added a search button in the bypass section that works categories.&#x0a;
+* I’ve added a few more buttons.&#x0a;
+* Some changes to the app’s security&#x0a;"/>
+
+                    <!--v2.0.0.0-->
+                    <TextBlock Text="v2.0.0.0" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* Full integration of OnlineFix into the app.&#x0a;
+* New background with a cleaner and more modern look.&#x0a;
+* General performance improvements: faster startup and smoother &#x0a;    navigation.&#x0a;
+* New sponsor added to the main section.&#x0a;
+* New button to join the official Mert Tool server.&#x0a;
+* Partial redesign of the Bypass section, with a clearer and more polished &#x0a;    layout."/>
+
+                    <!--v0.2.0.3-->
+                    <TextBlock Text="v0.2.0.3" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* A carousel with the sponsors has been added to the main menu.
+                               "/>
+
+                    <!--v1.0.0.1-->
+                    <TextBlock Text="v0.1.0.1" Foreground="White" FontSize="22" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+                    
+                    <TextBlock Foreground="White" FontSize="16" FontWeight="Normal" Margin="0,0,0,10" TextAlignment="Left" TextWrapping="Wrap" Text="
+* Fixed a bug that prevented recently added games from appearing after &#x0a;   reinstalling or performing a fresh install of the program.
+                               "/>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </Border>
+</Window>
